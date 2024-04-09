@@ -21,25 +21,25 @@ _main PROC
 
     ; Calculate sumEarned
     mov eax, [pointsEarned + ecx * 4]       ; Move pointsEarned[0] to EAX
-    add eax, [pointsEarned + ecx * 4 + 4]   ; Add pointsEarned[1] to EAX
-    add eax, [pointsEarned + ecx * 4 + 8]   ; Add pointsEarned[2] to EAX 
-    add eax, [pointsEarned + ecx * 4 + 12]  ; Add pointsEarned[3] to EAX
+    add eax, [pointsEarned + ecx * 4 + 4]   ; Adding the next index with weights to EAX
+    add eax, [pointsEarned + ecx * 4 + 8]   ; Add the next index to EAX 
+    add eax, [pointsEarned + ecx * 4 + 12]  ; Add the final index to EAX
 
     ; Calculate sumPossible
-    mov ebx, [pointsPossible + ecx * 4]       ; Move pointsPossible[0] to EBX
-    add ebx, [pointsPossible + ecx * 4 + 4]   ; Add pointsPossible[1] to EBX
-    add ebx, [pointsPossible + ecx * 4 + 8]   ; Add pointsPossible[2] to EBX
-    add ebx, [pointsPossible + ecx * 4 + 12]  ; Add pointsPossible[3] to EBX
+    mov ebx, [pointsPossible + ecx * 4]       ; Move first index to EBX
+    add ebx, [pointsPossible + ecx * 4 + 4]   ; Add next index to EBX
+    add ebx, [pointsPossible + ecx * 4 + 8]   ; Add next index to EBX
+    add ebx, [pointsPossible + ecx * 4 + 12]  ; Add final index with weights to EBX
 
     ; Calculate percentage
     mov ecx, 100    ; Move 100 to ECX
     mul ecx         ; Multiply EAX by 100
     div ebx         ; Divide EAX by EBX
 
-    ; Store the result in the percent variable
+    ; Store the answer in the percent variable
     mov percent, eax
 
-    ; Exit the program
+    ; Deinit/exit
     mov eax, 0
     ret
 
